@@ -1,15 +1,22 @@
 <template>
-  <div>
-    <div v-if="pending">
+  <div class="pt-7">
+    <div v-if="!products">
       <div>Loading...</div>
     </div>
     <ProductCard v-else :products="products" />
+    <p>{{ data }}</p>
   </div>
 </template>
 
 <script setup>
-const {data: products, pending, error, refresh} = await useAsyncData("products", () => $fetch(`https://63f2d751f28929a9df605107.mockapi.io/nttp/products`)
-);
-</script>
+import {useApi} from '~/stores/api'
+const productFromApi = useApi();
+onMounted(async() => {
+  await productFromApi.getProducts();
+})
+const products = computed(() => productFromApi?.product)
 
-<style scoped></style>
+watch(products, val => {
+  console.log(val);
+})
+</script>

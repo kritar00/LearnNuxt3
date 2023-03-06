@@ -18,7 +18,7 @@ module.exports = {
 			md: '768px',
 			xmd: '880px',
 			lg: '1024px',
-			main: '1170px', // 1170px is area main size
+			main: '1170px',
 			sxl: '1200px',
 			xl: '1280px',
 			mxl: '1400px',

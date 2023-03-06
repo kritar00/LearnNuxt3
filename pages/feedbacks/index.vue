@@ -1,10 +1,10 @@
 <template>
     <div>
-        <h2>About page that about to be a page</h2>
+        <h2>Nothing</h2>
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 
 </script>
 
