@@ -15,8 +15,11 @@
   },
   "dependencies": {
     "@pinia/nuxt": "^0.4.7",
+    "@tailwindcss/aspect-ratio": "^0.4.2",
+    "@tailwindcss/line-clamp": "^0.4.2",
     "eslint": "^8.34.0",
-    "pinia": "^2.0.32"
+    "pinia": "^2.0.32",
+    "sass": "^1.58.3"
   },
   "overrides": {
     "vue": "latest"

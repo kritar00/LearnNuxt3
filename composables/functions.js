@@ -23,19 +23,3 @@ export function trackScrollY() {
     })
     return y;
 }
-
-export async function getProductsFromAPI() {
-    const runtimeConfig = useRuntimeConfig();
-    try {
-        const response = await $fetch(runtimeConfig.public.productsApi);
-        if(response.length) {
-            return {
-                data: response
-            }
-        }
-    } catch (error) {
-        return {
-            data: []
-        }
-    }
-}

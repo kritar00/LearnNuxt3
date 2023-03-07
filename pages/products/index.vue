@@ -1,22 +1,27 @@
 <template>
   <div class="pt-7">
-    <div v-if="!products">
+    <div v-if="pending">
       <div>Loading...</div>
     </div>
-    <ProductCard v-else :products="products" />
-    <p>{{ data }}</p>
+    <ProductCard v-else :products="data?.data" />
   </div>
 </template>
 
 <script setup>
-import {useApi} from '~/stores/api'
-const productFromApi = useApi();
-onMounted(async() => {
-  await productFromApi.getProducts();
+const runtimeConfig = useRuntimeConfig();
+const {data, pending} = useAsyncData('getProducts', async () => {
+    try {
+        const response = await $fetch(runtimeConfig.public.productsApi);
+        if(response.length) {
+            return {
+                data: response
+            }
+        }
+    } catch (error) {
+        return {
+            data: []
+        }
+    }
 })
-const products = computed(() => productFromApi?.product)
 
-watch(products, val => {
-  console.log(val);
-})
 </script>
