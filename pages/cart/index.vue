@@ -5,11 +5,11 @@
             <p>{{ item?.id }}</p>
             <p class="line-clamp-1">{{ item?.name }}</p>
             <input type="number" class="w-11 h-8 text-black" v-model="item.qty">
-            <p>Price: {{ item.qty*item.price }} credits</p>
+            <p>Price: ${{ item.qty*item.price }} credits</p>
             <button class=""><img src="~~/assets/remove.svg" class="remove-btn" alt=""></button>
         </div>
-        <p>Price to pay: {{ priceSum }}</p>
-        <button></button>
+        <p>Price to pay: ${{ priceSum }}</p>
+        <button>To checkout</button>
     </div>
 </template>
 
@@ -17,12 +17,8 @@
 import { storeToRefs } from 'pinia';
 import { useCart } from '~~/stores/useCart';
 const checkout = useCart()
-let priceSum = ref(0);
 const {cart} = storeToRefs(checkout);
-watch(cart.value, val => {
-    console.log(val[0]);
-    priceSum.value = val.reduce((partial, value) => partial + value.price, 0)
-})
+const priceSum = computed(() => cart.value.reduce((partial, curr) => partial + (curr.price * curr.qty), 0))
 </script>
 
 <style lang="scss" scoped>
